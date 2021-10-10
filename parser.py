@@ -9,50 +9,7 @@ mydb = client["trufla"]
 collection1 = mydb["xml"]
 collection2 = mydb["csv"]
 
-# A function to call the API and enrich vehicle data for csv files
 
-
-def enrich_csv(vehicles):
-    # looping in vehicles list.
-    for x in vehicles:
-        # capturing parameters for API and calling it.
-        vin = x["vin_number"]
-        year = x["model_year"]
-        url = f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{vin}?format=json&modelyear={year}"
-        payload = {}
-        headers = {}
-        response = requests.request("GET", url, headers=headers, data=payload)
-        # capturing enriched  data and adding them to each vehicle inside list.
-        p = json.loads(response.text)
-        model = p["Results"][0]["Model"]
-        manufacturer = p["Results"][0]["Manufacturer"]
-        plant_country = p["Results"][0]["PlantCountry"]
-        vehicle_type = p["Results"][0]["VehicleType"]
-        x["model"] = model
-        x["manufacturer"] = manufacturer
-        x["plant_country"] = plant_country
-        x["vehicle_type"] = vehicle_type
-    return vehicles
-
-
-# A function to call the API and enrich vehicle data for xml files.
-def enrich_xml(vehicles: list):
-    # looping in vehicles list.
-    for x in vehicles:
-        # capturing parameters for API and calling it.
-        vin = x["VinNumber"]
-        year = x["ModelYear"]
-        url = f"https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/{vin}?format=json&modelyear={year}"
-        payload = {}
-        headers = {}
-        response = requests.request("GET", url, headers=headers, data=payload)
-        # capturing enriched  data and adding them to each vehicle inside list.
-        p = json.loads(response.text)
-        x["model"] = p["Results"][0]["Model"]
-        x["manufacturer"] = p["Results"][0]["Manufacturer"]
-        x["plant_country"] = p["Results"][0]["PlantCountry"]
-        x["vehicle_type"] = p["Results"][0]["VehicleType"]
-    return vehicles
 
 
 # typer module for CLI.
@@ -160,7 +117,6 @@ def csv(customer_file: str, vehicle_file: str):
             for v in vdata:
                 if customer["id"] == v["owner_id"]:
                     vehicles.append(v)
-                    enrich_csv(vehicles)
                 trans = {"date": date, "customer": customer,
                          "vehicles": vehicles}
                 trans_list.append(trans)
