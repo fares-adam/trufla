@@ -71,6 +71,64 @@ def xml(filename: str):
         json_file.close()
         print(json.dumps(final, indent=2, ensure_ascii=False))
 
+@app.command()
+def csv(customer_file: str, vehicle_file: str):
 
+    time_stamp = time.time()
+    # reading csv  customer file to dataframe.
+    csv_customer_file = pd.DataFrame(pd.read_csv(
+        f"/home/fares/Desktop/trufla/python_task_data/input_data/csv/{customer_file}.csv", sep=",", header=0, index_col=False))
+    # converting DataFrame to json and writing it to file for further use.
+    csv_customer_file.to_json("csv_customer_file.json", orient="records", date_format="epoch",
+                              double_precision=10, force_ascii=True, date_unit="ms", default_handler=None)
+    # reading json data from file.
+    f = open("csv_customer_file.json",)
+    data = json.load(f)
+    # removing tempfile
+    os.remove("csv_customer_file.json")
+    # reading csv  customer file to dataframe.
+    csv_vehicles_file = pd.DataFrame(pd.read_csv(
+        f"/home/fares/Desktop/trufla/python_task_data/input_data/csv/{vehicle_file}.csv", sep=",", header=0, index_col=False))
+    # converting DataFrame to json and writing it to file for further use.
+    csv_vehicles_file.to_json("csv_vehicles_file.json", orient="records", date_format="epoch",
+                              double_precision=10, force_ascii=True, date_unit="ms", default_handler=None)
+    # reading json data from file
+    v = open("csv_vehicles_file.json",)
+    vdata = json.load(v)
+    trans_list = []
+    # removing tempfile
+    os.remove("csv_vehicles_file.json")
+    # a function to return all transaction (bulk)
+
+    def transaction():
+        # looping through customer and vechiles and getting date ,and checking each vechile with customer and assign ownership
+        for i in data:
+            vehicles = []
+            date = i.get("date")
+            customer = i.copy()
+            del customer["date"]
+            for v in vdata:
+                if customer["id"] == v["owner_id"]:
+                    vehicles.append(v)
+                trans = {"date": date, "customer": customer,
+                         "vehicles": vehicles}
+                trans_list.append(trans)
+
+    transaction()
+    # looping through transaction list and removing duplicate dicts
+    final_trans_list = [i for n, i in enumerate(
+        trans_list) if i not in trans_list[n + 1:]]
+    # completing final dict
+    final = {"filename": f"{customer_file}_file1.csv_{vehicle_file}_file.csv",
+             "transaction": final_trans_list}
+
+    #print(json.dumps(final, indent=2, ensure_ascii=False))
+    # writing to file
+    with open(f"/home/fares/Desktop/trufla/python_task_data/output/csv/{time_stamp}_{customer_file}_{vehicle_file}.json", "w") as json_file:
+        json_file.write(json.dumps(final, indent=2, ensure_ascii=False))
+        json_file.close()
+        print(json.dumps(final, indent=2, ensure_ascii=False))
+        
+        
 if __name__ == "__main__":
     app()
