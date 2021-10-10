@@ -1,4 +1,5 @@
 # trufla-coding-challenge
+this installation guide is for linux OS only.
 # install python , python3.
 using the following commands:(provide the password when prompted)
 
