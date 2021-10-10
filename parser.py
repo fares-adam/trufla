@@ -1,11 +1,22 @@
 #!/usr/bin/python3
-import json, typer, xmltodict , os , time
+import requests, json, typer, xmltodict , os , time
 import pandas as pd
+import pymongo
+import urllib.parse
 
+user_name = urllib.parse.quote_plus('trufla_admin')
+pass_word = urllib.parse.quote_plus("p@ssw0rd")
+client = pymongo.MongoClient(username="trufla_admin", password="p@ssw0rd")
 
+mydb = client["trufla"]
+#mydb.createUser( { "user": "trufla_admin", "pwd": "P@ssw0rd"})
+collection1 = mydb["xml"]
+collection2 = mydb["csv"]
 
 # typer module for CLI.
 app = typer.Typer()
+
+
 # XML cli
 # make sure to ask about if the user needs to give the extension with the file name or not
 # example : parser.py xml file1.xml
@@ -17,7 +28,7 @@ def xml(filename: str):
     # open the input xml file and read
     # data in form of python dictionary
     # using xmltodict module
-    with open(f"/home/fares/Desktop/trufla/python_task_data/input_data/xml/{time_stamp}_{filename}.xml") as xml_file:
+    with open(f"/home/fares/Desktop/trufla/python_task_data/input_data/xml/{filename}.xml") as xml_file:
         data_dict = xmltodict.parse(xml_file.read())
         xml_file.close()
         # generate the object using json.dumps() , changing from orderedDict to normal dict.
@@ -43,15 +54,12 @@ def xml(filename: str):
         vehicles = []
         # changing @id key to id .
         for i in vehicles_temp:
-            print(i)
             if isinstance(i, dict):
                 i = {"id" if k == "@id" else k: v for k, v in i.items()}
                 vehicles.append(i)
             elif isinstance(i,list):
                 for x in i:
-                    print(x , "x")
                     x={"id" if k == "@id" else k: v for k, v in x.items()}
-                    print(x , "x after")
                     vehicles.append(x)
 
             #vehicles.append(i)
@@ -66,10 +74,9 @@ def xml(filename: str):
     final = {"filename": f"{filename}.xml", "transacrtion": [trans]}
     # Write the json data to db
     # json file
-    with open(f"/home/fares/Desktop/trufla/python_task_data/output/xml/{time_stamp}_{filename}.json", "w") as json_file:
-        json_file.write(json.dumps(final, indent=2, ensure_ascii=False))
-        json_file.close()
-        print(json.dumps(final, indent=2, ensure_ascii=False))
+    print(json.dumps(final, indent=2, ensure_ascii=False))
+    collection1.insert_one(final)
+
 
 @app.command()
 def csv(customer_file: str, vehicle_file: str):
@@ -122,13 +129,10 @@ def csv(customer_file: str, vehicle_file: str):
     final = {"filename": f"{customer_file}_file1.csv_{vehicle_file}_file.csv",
              "transaction": final_trans_list}
 
-    #print(json.dumps(final, indent=2, ensure_ascii=False))
-    # writing to file
-    with open(f"/home/fares/Desktop/trufla/python_task_data/output/csv/{time_stamp}_{customer_file}_{vehicle_file}.json", "w") as json_file:
-        json_file.write(json.dumps(final, indent=2, ensure_ascii=False))
-        json_file.close()
-        print(json.dumps(final, indent=2, ensure_ascii=False))
-        
-        
+    print(json.dumps(final, indent=2, ensure_ascii=False))
+    # inserting to db
+    collection2.insert_one(final)
+
+
 if __name__ == "__main__":
     app()
