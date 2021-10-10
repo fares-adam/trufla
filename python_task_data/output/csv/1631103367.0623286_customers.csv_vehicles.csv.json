@@ -1,0 +1,78 @@
+{
+    "file_name": "customers_file1.csv_vehicles_file1.csv",
+    "transaction": [
+        {
+            "date": "2020-01-31",
+            "customer": {
+                "id": "ID5410",
+                "name": "Melissa T Miller",
+                "address": "2837  Fidler Drive",
+                "phone": "210-624-7306"
+            },
+            "vehicles": [
+                {
+                    "id": "V1475",
+                    "make": "Ford",
+                    "vin_number": "1FTSW3XG5FKB11488",
+                    "model_year": "2015",
+                    "model": "Transit",
+                    "manufacturer": "FORD MOTOR COMPANY, USA",
+                    "plant_country": "UNITED STATES (USA)",
+                    "vehicle_type": "TRUCK "
+                }
+            ]
+        },
+        {
+            "date": "2020-04-25",
+            "customer": {
+                "id": "ID9857",
+                "name": "Daniel I Walker",
+                "address": "3853  Hilltop Street",
+                "phone": "413-655-7397"
+            },
+            "vehicles": [
+                {
+                    "id": "V3015",
+                    "make": "Chevrolet",
+                    "vin_number": "1G1ZD5EB6AF0053EX",
+                    "model_year": "2010",
+                    "model": "Malibu",
+                    "manufacturer": "GENERAL MOTORS LLC",
+                    "plant_country": "UNITED STATES (USA)",
+                    "vehicle_type": "PASSENGER CAR"
+                },
+                {
+                    "id": "V2014",
+                    "make": "Honda",
+                    "vin_number": "JH2SC3327WM200123",
+                    "model_year": "1998",
+                    "model": "CBR900",
+                    "manufacturer": "HONDA MOTOR CO., LTD",
+                    "plant_country": "JAPAN",
+                    "vehicle_type": "MOTORCYCLE"
+                }
+            ]
+        },
+        {
+            "date": "2020-03-16",
+            "customer": {
+                "id": "ID6651",
+                "name": "Pauline J Buxton",
+                "address": "1927  Pinnickinick Street",
+                "phone": "360-727-9275"
+            },
+            "vehicles": [
+                {
+                    "id": "V786",
+                    "make": "Nissan",
+                    "vin_number": "JN6JD02S0E0011849",
+                    "model_year": "2014",
+                    "model": "Pickup",
+                    "manufacturer": "NISSAN MOTOR COMPANY, LTD",
+                    "plant_country": "",
+                    "vehicle_type": "TRUCK "
+                }
+            ]
+        }
+    ]
+}
