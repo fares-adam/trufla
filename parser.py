@@ -1,15 +1,11 @@
 #!/usr/bin/python3
-import requests, json, typer, xmltodict , os , time
+import requests, json, typer, xmltodict , os , time , pymongo
 import pandas as pd
-import pymongo
-import urllib.parse
 
-user_name = urllib.parse.quote_plus('trufla_admin')
-pass_word = urllib.parse.quote_plus("p@ssw0rd")
+
 client = pymongo.MongoClient(username="trufla_admin", password="p@ssw0rd")
 
 mydb = client["trufla"]
-#mydb.createUser( { "user": "trufla_admin", "pwd": "P@ssw0rd"})
 collection1 = mydb["xml"]
 collection2 = mydb["csv"]
 
