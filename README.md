@@ -20,7 +20,7 @@ install autopep 8:
 ~$ autopep8 -i parser.py
  
 --------------------------------------------------------------------------------------------------------------------------------------------
-# install requiremnts using the following command using the requirements.txt file and pip:
+# install requirements using the following command using the requirements.txt file and pip:
 pip install -r /path/to/requirements.txt
 
 or install them manually using the following commands:
@@ -33,9 +33,7 @@ or install them manually using the following commands:
 
 ~$ pip install pandas
 
-# feature 3:
-
- ~$ pip install pymongo
+~$ pip install pymongo
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 # feature 1 and 2.
