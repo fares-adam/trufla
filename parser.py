@@ -2,9 +2,12 @@
 import requests, json, typer, xmltodict , os , time , pymongo
 import pandas as pd
 
+
+
 client = pymongo.MongoClient(username="trufla_admin", password="p@ssw0rd")
 
 mydb = client["trufla"]
+#mydb.createUser( { "user": "trufla_admin", "pwd": "P@ssw0rd"})
 collection1 = mydb["xml"]
 collection2 = mydb["csv"]
 
@@ -93,15 +96,12 @@ def xml(filename: str):
         vehicles = []
         # changing @id key to id .
         for i in vehicles_temp:
-            print(i)
             if isinstance(i, dict):
                 i = {"id" if k == "@id" else k: v for k, v in i.items()}
                 vehicles.append(i)
             elif isinstance(i,list):
                 for x in i:
-                    print(x , "x")
                     x={"id" if k == "@id" else k: v for k, v in x.items()}
-                    print(x , "x after")
                     vehicles.append(x)
 
             #vehicles.append(i)
@@ -110,7 +110,7 @@ def xml(filename: str):
     # putting customer dict into proper format
     customer = {"id": id, "name": name, "address": add, "phone": phone}
     # putting the transaction dict into proper format and inserting customer dict
-    trans = {"date": date, "customer": customer, "vehicles": vehicles}
+    trans = {"date": date, "customer": customer, "vehicles": enrich_xml(vehicles)}
 
     # merging all dicts into the final dict
     final = {"filename": f"{filename}.xml", "transacrtion": [trans]}
@@ -172,7 +172,7 @@ def csv(customer_file: str, vehicle_file: str):
     final = {"filename": f"{customer_file}_file1.csv_{vehicle_file}_file.csv",
              "transaction": final_trans_list}
 
-    #print(json.dumps(final, indent=2, ensure_ascii=False))
+    print(json.dumps(final, indent=2, ensure_ascii=False))
     # inserting to db
     collection2.insert_one(final)
 
