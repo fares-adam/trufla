@@ -1,56 +1,58 @@
 # trufla-coding-challenge
-
-
-
-install python , python3.
+# install python , python3.
 using the folloing commands:(provide the password when prompted)
 
-
-# ~$ sudo apt-get install python
-
-  ~$ sudo apt-get install python3
-------------------------------------------------------------------------
-(OPTIONAL)(i would recommend installing conda evnviroment)
+ ~$ sudo apt-get install python
+ 
+ ~$ sudo apt-get install python3
+  
+---------------------------------------------------------------------------------------------------------------------------------------------
+# (OPTIONAL)(i would recommend installing conda evnviroment)
 see this url for steps of installation.
 url : https://docs.anaconda.com/anaconda/install/linux/
--------------------------------------------------------------------------------------------------------------------------
-(OPTIONAL BUT RECOMMENDED)
+---------------------------------------------------------------------------------------------------------------------------------------------
+# (OPTIONAL BUT RECOMMENDED)
 after cloning the project i would recommend running this tool , just to fix any indentation errors(if you face any just run the command):
 install autopep 8:
 
-# ~$ pip install autopep8
+~$ pip install autopep8
  
- ~$ autopep8 -i parser.py
--------------------------------------------------------------------------------------------------------------------------
-install requiremnts using the following command using the requirements.txt file and pip:
+~$ autopep8 -i parser.py
+ 
+--------------------------------------------------------------------------------------------------------------------------------------------
+# install requiremnts using the following command using the requirements.txt file and pip:
 pip install -r /path/to/requirements.txt
 
 or install them manually using the following commands:
 
-# ~$ pip install typer
+~$ pip install xmltodict
 
-# ~$ pip install pandas
+~$ pip install requests
 
-feature 3:
+~$ pip install typer
 
-# ~$ pip install pymongo
+~$ pip install pandas
 
--------------------------------------------------------------------------------------------------------------------------------
-feature 1 and 2.
-installation:
+# feature 3:
+
+ ~$ pip install pymongo
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+# feature 1 and 2.
+# installation:
 make sure the following line is the first line of the code.
 #!/usr/bin/python3
 
 to install as command run the following commands:
 
  Step 1: cd to project folder
-# ~$ cd /path/to/script
+ ~$ cd /path/to/script
 
 for example : cd /home/fares/Desktop/trufla
 
  Step2:make the script executable:
  
-# ~$ chmod +x <scriptname>.py
+ ~$ chmod +x <scriptname>.py
 
 for example :chmod +x hello.py
 
@@ -73,8 +75,9 @@ For example I want to run this file by calling parser.py, I will do
 
 Now you can run this welcome from anywhere on your system by just typing parser.py plus arguments in the terminal
 example : parser.py xml file1
---------------------------------------------------------------------------------------------------------------------------------
-feature 3.
+----------------------------------------------------------------------------------------------------------------------------------------------
+  
+# feature 3.
 
 install mongodb.
 
@@ -114,7 +117,7 @@ connect to your database through mongodb compass
 run the code
 and refresh and check data.
 
------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
 
 running steps:
 p.s : make sure you have the input data files in the correct path
@@ -137,6 +140,6 @@ p.s:as csv are read from two files.all file names are typed without the extensio
 
 note : in feature one you only need to provide the filename as its the only option there.
 
---------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 check the output files and database.
 
