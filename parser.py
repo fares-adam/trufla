@@ -128,5 +128,7 @@ def csv(customer_file: str, vehicle_file: str):
         json_file.write(json.dumps(final, indent=2, ensure_ascii=False))
         json_file.close()
         print(json.dumps(final, indent=2, ensure_ascii=False))
+        
+        
 if __name__ == "__main__":
     app()
