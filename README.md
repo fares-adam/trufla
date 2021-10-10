@@ -1,6 +1,6 @@
 # trufla-coding-challenge
 # install python , python3.
-using the folloing commands:(provide the password when prompted)
+using the following commands:(provide the password when prompted)
 
  ~$ sudo apt-get install python
  
